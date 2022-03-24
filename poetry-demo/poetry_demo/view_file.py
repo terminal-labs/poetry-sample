@@ -1,16 +1,16 @@
 import click
 
+# Make this a command line script
 @click.command()
-@click.argument("filename", nargs=-1, type=click.Path(exists=True, readable=True, writable=True))
-# @click.argument('input', type=click.File("r"))
-# @click.argument('output', type=click.File('wb'))
+# Require that at least one file be given that already exists and is readable and writable
+@click.argument("files_to_be_read", nargs=-1, type=click.Path(exists=True, readable=True, writable=True))
 # @click.option("--format", multiple=True, default=["json"])
-def view(filename):
-    file = ''.join(filename)
-    file = click.format_filename(file)
-    click.echo(f'Opening {file}. . .')
-    click.echo('_______________________________________________________________________________')
-    content = click.open_file(file, mode='r', encoding=None, errors='strict', lazy=None, atomic=False)
-    click.echo(content)
-    # click.open_file(mode='w', encoding=None, errors='strict', lazy=None, atomic=False)
-    click.echo('_______________________________________________________________________________')
+def view(files_to_be_read):
+    for filename in files_to_be_read:
+        file = ''.join(filename)
+        friendly_file = click.format_filename(file)
+        click.echo(f'Opening {friendly_file}. . .')
+        click.echo('_______________________________________________________________________________')
+        content = click.open_file(friendly_file, mode='r', encoding=None, errors='strict', lazy=None, atomic=False)
+        click.echo(content.read())
+        click.echo('_______________________________________________________________________________')

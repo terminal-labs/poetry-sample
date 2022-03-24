@@ -1,0 +1,8 @@
+Grocery List:
+Lettuce
+Tomato
+Apples
+Bananas
+Bread
+Oatmeal
+Milk
